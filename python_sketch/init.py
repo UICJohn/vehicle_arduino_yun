@@ -1,18 +1,29 @@
 from model import *
 
 if __name__ == "__main__":
+  
   try:
-    Vehicle.create_table()
+    StartUpCheck.create_table()
   except:
     print "TABLES ALREADY EXISTS!"
 
   try:
-    Temperature.create_table()
+    MinsCheck.create_table()
   except:
     print "TABLES ALREADY EXISTS!"
   
   try:
-    Voltage.create_table()
+    SecondsCheck.create_table()
+  except:
+    print "TABLES ALREADY EXISTS!"
+  
+  try:
+    ErrorMsg.create_table()
+  except:
+    print "TABLES ALREADY EXISTS!"
+
+  try:
+    VehicleInfo.create_table()
   except:
     print "TABLES ALREADY EXISTS!"
   

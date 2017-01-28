@@ -1,10 +1,10 @@
 #include <Bridge.h>
-#include <BridgeServer.h>
-#include <BridgeClient.h>
-#include <SoftwareSerial.h>
 #include <OBD2UART.h>
 #include <Process.h>
+#include <SoftwareSerial.h>
 #include "config.h"
+
+COBD obd;
 
 void setup() {
   Bridge.begin();
@@ -34,4 +34,25 @@ unsigned int insertToDB(String cols[], String value[], String table, int col_siz
   }
   cmd = cmd + columns_string + ") " +values_string + ") `";
   Console.print(cmd);
+}
+
+void readPID(){
+  static const byte pids[] = {}
+  int values[sizeof(pids)];
+  if(obd.readPID(pids, sizeof(pids), values)){
+    // process pid  
+  }else{
+    // error log
+  }
+}
+
+void processDTC(){
+  unsigned int codes[6];
+  if(obd.readDTC(codes, 6) != 0){
+    //process DTC
+  }
+}
+
+void clearDTC(){
+  obd.clearDTC(); 
 }
