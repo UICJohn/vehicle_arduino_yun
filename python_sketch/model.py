@@ -12,9 +12,9 @@ class Base(Model):
     select()
 
 class StartUpCheck(Base):
-  voltage = FloatField()
-  ignition_time = FloatField()
-  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'))
+  voltage = IntegerField()
+  ignition_time = IntegerField()
+  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'), constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')])
 
 class MinsCheck(Base):
   engine_oil_temp = IntegerField()
@@ -24,22 +24,14 @@ class MinsCheck(Base):
   intake_temp = IntegerField()
   intake_pressure = IntegerField()
   ambient_temp = IntegerField()
-  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'))
+  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'), constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')])
 
 class SecondsCheck(Base):
   speed = IntegerField()
   rpm = IntegerField()
   throttle = IntegerField()
-  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M:%S'), constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')])
 
 class ErrorMsg(Base):
   code = CharField()
-  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'))
-
-class VehicleInfo(Base):
-  brand = CharField()
-  model = CharField()
-  vin_number = CharField()
-  manufactured_at = DateTimeField()
-  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'))
-  updated_at = DateTimeField(default = datetime.now)
+  created_at = DateTimeField(default = datetime.now().strftime('%Y-%m-%d %H:%M'), constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')])

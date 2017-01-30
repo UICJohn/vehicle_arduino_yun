@@ -21,9 +21,3 @@ if __name__ == "__main__":
     ErrorMsg.create_table()
   except:
     print "TABLES ALREADY EXISTS!"
-
-  try:
-    VehicleInfo.create_table()
-  except:
-    print "TABLES ALREADY EXISTS!"
-  
