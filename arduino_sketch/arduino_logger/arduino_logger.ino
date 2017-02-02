@@ -1,15 +1,19 @@
+#include <fonts.h>
+#include <UTFT.h>
+#include <memorysaver.h>
+#include <MultiLCD.h>
+
 #include <OBD2UART.h>
 #include <Process.h>
 #include <SoftwareSerial.h>
 #include "config.h"
 
 COBD obd;
-
+LCD_ILI9341 lcd; 
 void setup() {
-  Console.begin(); 
-  while (!Console);
-  String value[4] = {"12", "5"};
-  insertToDB(startUpCheck, value, "startupcheck", STARTUP_CHECK_SIZE);
+  obd.begin();
+  while(!obd.init());
+  lcd.begin();
 }
 
 void loop(){
@@ -33,15 +37,19 @@ unsigned int insertToDB(String cols[], String value[], String table, int col_siz
   p.runShellCommand(cmd);
 }
 
-
+void setMonitor(String info[]) {
+  lcd.setFontSize(FONT_SIZE_XLARGE);
+  lcd.print(info[0]);
+  lcd.setFontSize(FONT_SIZE_MEDIUM);
+  lcd.print("km/h");
+  
+}
 
 void readPID(){
   static const byte pids[] = {};
   int values[sizeof(pids)];
   if(obd.readPID(pids, sizeof(pids), values)){
     // process pid  
-  }else{
-    // error log
   }
 }
 
