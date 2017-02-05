@@ -1,3 +1,6 @@
+#include <Event.h>
+#include <Timer.h>
+
 #include <fonts.h>
 #include <UTFT.h>
 #include <memorysaver.h>
@@ -7,17 +10,20 @@
 #include <Process.h>
 #include <SoftwareSerial.h>
 #include "config.h"
-
+Timer t;
 COBD obd;
 LCD_ILI9341 lcd; 
 void setup() {
+  Bridge.begin();
+  Console.begin();
   obd.begin();
   while(!obd.init());
   lcd.begin();
+  //Setup Timer For Data writing here
 }
 
 void loop(){
-
+  t.update();
 }
 
 unsigned int insertToDB(String cols[], String value[], String table, int col_size){
